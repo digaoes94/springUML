@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import UML.springUML.domain.Categoria;
 import UML.springUML.repositories.CategoriaRepository;
+import UML.springUML.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -15,6 +16,6 @@ public class CategoriaService {
 	
 	public Categoria find(Integer id) {
 		Optional<Categoria> obj = catRepo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Categoria de ID " + id + " não encontrada. Tipo: " + Categoria.class.getName()));
 	}
 }
