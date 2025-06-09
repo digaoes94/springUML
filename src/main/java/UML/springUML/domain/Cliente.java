@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import UML.springUML.domain.enums.TipoCliente;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
@@ -24,7 +26,8 @@ public class Cliente implements Serializable {
 	private String nome, email, cpfOuCpj;
 	private Integer tipo;
 	
-	@OneToMany(mappedBy="cliente") private List<Endereco> enderecos = new ArrayList<Endereco>();
+	@OneToMany(mappedBy="cliente") @JsonManagedReference
+	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	
 	@ElementCollection
 	@CollectionTable(name="telefones")

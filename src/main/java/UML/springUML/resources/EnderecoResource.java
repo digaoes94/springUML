@@ -11,7 +11,7 @@ import UML.springUML.domain.Endereco;
 import UML.springUML.services.EnderecoService;
 
 @RestController
-@RequestMapping("/Enderecos")
+@RequestMapping("/enderecos")
 public class EnderecoResource {
 	
 	@Autowired

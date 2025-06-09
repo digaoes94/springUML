@@ -11,7 +11,7 @@ import UML.springUML.domain.Cliente;
 import UML.springUML.services.ClienteService;
 
 @RestController
-@RequestMapping("/Clientes")
+@RequestMapping("/clientes")
 public class ClienteResource {
 	
 	@Autowired
