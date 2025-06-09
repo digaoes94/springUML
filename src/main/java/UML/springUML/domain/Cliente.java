@@ -8,10 +8,15 @@ import java.util.Objects;
 import java.util.Set;
 
 import UML.springUML.domain.enums.TipoCliente;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
+@Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -19,7 +24,10 @@ public class Cliente implements Serializable {
 	private String nome, email, cpfOuCpj;
 	private Integer tipo;
 	
-	private List<Endereco> enderecos = new ArrayList<Endereco>();
+	@OneToMany(mappedBy="cliente") private List<Endereco> enderecos = new ArrayList<Endereco>();
+	
+	@ElementCollection
+	@CollectionTable(name="telefones")
 	private Set<String> telefones = new HashSet<>();
 	
 	public Cliente() {}
