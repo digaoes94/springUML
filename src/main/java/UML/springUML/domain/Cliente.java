@@ -29,6 +29,10 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy="cliente") @JsonManagedReference
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	
+	
+	private List<Pedido> pedidos = new ArrayList<Pedido>();
+	
+
 	@ElementCollection
 	@CollectionTable(name="telefones")
 	private Set<String> telefones = new HashSet<>();
@@ -92,6 +96,13 @@ public class Cliente implements Serializable {
 		this.telefones = telefones;
 	}
 
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
