@@ -4,17 +4,21 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import UML.springUML.domain.enums.EstadoPagamento;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 
+@Entity
 public abstract class Pagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Integer id;
+	@Id private Integer id;
 	private EstadoPagamento situacao;
-	@OneToOne private Pedido pedido;
+	
+	@OneToOne @JoinColumn(name="pedido_id") @MapsId
+	private Pedido pedido;
 	
 	public Pagamento() {}
 
