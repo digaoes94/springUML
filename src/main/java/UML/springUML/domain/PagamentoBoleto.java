@@ -3,7 +3,9 @@ package UML.springUML.domain;
 import java.time.LocalDate;
 
 import UML.springUML.domain.enums.EstadoPagamento;
+import jakarta.persistence.Entity;
 
+@Entity
 public class PagamentoBoleto extends Pagamento {
 	private static final long serialVersionUID = 1L;
 	
@@ -40,7 +42,4 @@ public class PagamentoBoleto extends Pagamento {
 	public void setPagamento(LocalDate pagamento) {
 		this.pagamento = pagamento;
 	}
-
-	
-	
 }

@@ -29,10 +29,9 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy="cliente") @JsonManagedReference
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	
-	
+	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	
-
 	@ElementCollection
 	@CollectionTable(name="telefones")
 	private Set<String> telefones = new HashSet<>();

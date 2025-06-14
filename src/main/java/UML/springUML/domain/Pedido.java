@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -19,22 +21,25 @@ public class Pedido implements Serializable {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Integer id;
 	private Instant instante;
+	
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name="enderecoEntrega_id")
 	private Endereco enderecoEntrega;
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
 	
-	private List<ItemPedido> itens = new ArrayList<ItemPedido>();
-	
 	public Pedido() {}
 
-	public Pedido(Integer id, Instant instante, Cliente cliente, Endereco enderecoEntrega, Pagamento pagamento) {
+	public Pedido(Integer id, Cliente cliente, Endereco enderecoEntrega) {
 		this.id = id;
-		this.instante = instante;
+		this.instante = Instant.now();
 		this.cliente = cliente;
 		this.enderecoEntrega = enderecoEntrega;
-		this.pagamento = pagamento;
 	}
 
 	public Integer getId() {
@@ -72,12 +77,7 @@ public class Pedido implements Serializable {
 		this.pagamento = pagamento;
 	}
 
-	public List<ItemPedido> getItens() {
-		return itens;
-	}
-	public void setItens(List<ItemPedido> itens) {
-		this.itens = itens;
-	}
+	
 
 	@Override
 	public int hashCode() {

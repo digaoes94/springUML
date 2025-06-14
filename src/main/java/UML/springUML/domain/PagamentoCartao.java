@@ -1,7 +1,9 @@
 package UML.springUML.domain;
 
 import UML.springUML.domain.enums.EstadoPagamento;
+import jakarta.persistence.Entity;
 
+@Entity
 public class PagamentoCartao extends Pagamento {
 	private static final long serialVersionUID = 1L;
 	
