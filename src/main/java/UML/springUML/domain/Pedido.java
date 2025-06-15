@@ -2,9 +2,9 @@ package UML.springUML.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -32,6 +32,8 @@ public class Pedido implements Serializable {
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
+	
+	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 	
 	public Pedido() {}
 
@@ -77,7 +79,12 @@ public class Pedido implements Serializable {
 		this.pagamento = pagamento;
 	}
 
-	
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
 
 	@Override
 	public int hashCode() {
