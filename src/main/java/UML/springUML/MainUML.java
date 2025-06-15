@@ -12,6 +12,7 @@ import UML.springUML.domain.Cidade;
 import UML.springUML.domain.Cliente;
 import UML.springUML.domain.Endereco;
 import UML.springUML.domain.Estado;
+import UML.springUML.domain.ItemPedido;
 import UML.springUML.domain.PagamentoBoleto;
 import UML.springUML.domain.PagamentoCartao;
 import UML.springUML.domain.Pedido;
@@ -23,6 +24,7 @@ import UML.springUML.repositories.CidadeRepository;
 import UML.springUML.repositories.ClienteRepository;
 import UML.springUML.repositories.EnderecoRepository;
 import UML.springUML.repositories.EstadoRepository;
+import UML.springUML.repositories.ItemPedidoRepository;
 import UML.springUML.repositories.PedidoRepository;
 import UML.springUML.repositories.ProdutoRepository;
 
@@ -35,6 +37,7 @@ public class MainUML implements CommandLineRunner {
 	@Autowired private ClienteRepository cliRepo;
 	@Autowired private EnderecoRepository endRepo;
 	@Autowired private PedidoRepository pedRepo;
+	@Autowired private ItemPedidoRepository itemRepo;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MainUML.class, args);
@@ -57,8 +60,6 @@ public class MainUML implements CommandLineRunner {
 		Cidade cid3 = new Cidade(null, "Belo Horizonte", est2);
 		Cidade cid4 = new Cidade(null, "Campanha", est2);
 		
-		
-		
 		Cliente cli1 = new Cliente(null, "Rodrigo Araujo", "rodrigo@rodrigo", "11111111111", TipoCliente.CPF);
 		cli1.getTelefones().add("012345678");
 		Cliente cli2 = new Cliente(null, "Moqueca Games", "moqueca@games", "2222222222222222", TipoCliente.CPJ);
@@ -76,7 +77,12 @@ public class MainUML implements CommandLineRunner {
 		ped2.setPagamento(new PagamentoCartao(null, EstadoPagamento.toEnum(1), ped2, 4));
 		cli2.getPedidos().add(ped2);
 		
-		
+		ItemPedido item1 = new ItemPedido(ped1, p2, 2, 0.2);
+		ped1.getItens().add(item1);
+		p2.getItens().add(item1);
+		ItemPedido item2 = new ItemPedido(ped2, p3, 3, 0.1);
+		ped2.getItens().add(item2);
+		p3.getItens().add(item2);
 		
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2));
@@ -93,5 +99,6 @@ public class MainUML implements CommandLineRunner {
 		cliRepo.saveAll(Arrays.asList(cli1, cli2));
 		endRepo.saveAll(Arrays.asList(end1, end2));
 		pedRepo.saveAll(Arrays.asList(ped1, ped2));
+		itemRepo.saveAll(Arrays.asList(item1, item2));
 	}
 }

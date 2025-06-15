@@ -4,20 +4,21 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import UML.springUML.domain.pk.ItemPedidoPK;
-import jakarta.persistence.Id;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
 
+@Entity
 public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id private ItemPedidoPK id = new ItemPedidoPK();
+	@EmbeddedId private ItemPedidoPK id;
 	private Double preco, subtotal;
 	private Integer qtd;
 	
 	public ItemPedido() {}
 	
 	public ItemPedido(Pedido pedido, Produto prod, Integer qtd, Double desc) {
-		id.setPedido(pedido);
-		id.setProd(prod);
+		this.id = new ItemPedidoPK(pedido, prod);
 		this.preco = prod.getPreco();
 		this.qtd = qtd;
 		this.subtotal = preco * qtd * (1.0 - desc);

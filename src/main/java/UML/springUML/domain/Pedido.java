@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -33,6 +34,7 @@ public class Pedido implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
 	
+	@OneToMany(mappedBy="id.pedido")
 	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 	
 	public Pedido() {}
