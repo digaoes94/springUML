@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import UML.springUML.domain.Pedido;
 import UML.springUML.domain.Produto;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,11 +19,6 @@ public class ItemPedidoPK implements Serializable {
 	
 	@ManyToOne @JoinColumn(name="produto_id")
 	private Produto prod;
-	
-	public ItemPedidoPK(Pedido pedido, Produto prod) {
-		this.pedido = pedido;
-		this.prod = prod;
-	}
 	
 	public Pedido getPedido() {
 		return pedido;

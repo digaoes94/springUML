@@ -11,14 +11,17 @@ import jakarta.persistence.Entity;
 public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@EmbeddedId private ItemPedidoPK id;
+	@EmbeddedId
+	private ItemPedidoPK id = new ItemPedidoPK();
+	
 	private Double preco, subtotal;
 	private Integer qtd;
 	
 	public ItemPedido() {}
 	
 	public ItemPedido(Pedido pedido, Produto prod, Integer qtd, Double desc) {
-		this.id = new ItemPedidoPK(pedido, prod);
+		id.setPedido(pedido);
+		id.setProd(prod);
 		this.preco = prod.getPreco();
 		this.qtd = qtd;
 		this.subtotal = preco * qtd * (1.0 - desc);
