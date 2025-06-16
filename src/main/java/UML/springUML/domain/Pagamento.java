@@ -3,6 +3,8 @@ package UML.springUML.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import UML.springUML.domain.enums.EstadoPagamento;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,6 +21,7 @@ public abstract class Pagamento implements Serializable {
 	@Id private Integer id;
 	private EstadoPagamento situacao;
 	
+	@JsonBackReference
 	@OneToOne @JoinColumn(name="pedido_id") @MapsId
 	private Pedido pedido;
 	

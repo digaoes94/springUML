@@ -11,7 +11,7 @@ import UML.springUML.domain.Pedido;
 import UML.springUML.services.PedidoService;
 
 @RestController
-@RequestMapping("/Pedidos")
+@RequestMapping("/pedidos")
 public class PedidoResource {
 	
 	@Autowired

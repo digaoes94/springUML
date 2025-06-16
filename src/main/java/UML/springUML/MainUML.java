@@ -70,10 +70,10 @@ public class MainUML implements CommandLineRunner {
 		Endereco end2 = new Endereco(null, "Rua Anhangá", "1988", "Loja 903", "Bairro Ibirapuera", "00000000", cid3, cli2);
 		cli2.getEnderecos().add(end2);
 		
-		Pedido ped1 = new Pedido(null, null, end1);
+		Pedido ped1 = new Pedido(null, cli1, end1);
 		ped1.setPagamento(new PagamentoBoleto(null, EstadoPagamento.toEnum(1), ped1));
 		cli1.getPedidos().add(ped1);
-		Pedido ped2 = new Pedido(null, null, end2);
+		Pedido ped2 = new Pedido(null, cli2, end2);
 		ped2.setPagamento(new PagamentoCartao(null, EstadoPagamento.toEnum(1), ped2, 4));
 		cli2.getPedidos().add(ped2);
 		

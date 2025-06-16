@@ -2,9 +2,13 @@ package UML.springUML.domain;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -21,8 +25,9 @@ public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Integer id;
-	private Instant instante;
+	private LocalTime instante;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
@@ -31,9 +36,11 @@ public class Pedido implements Serializable {
 	@JoinColumn(name="enderecoEntrega_id")
 	private Endereco enderecoEntrega;
 	
+	@JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="id.pedido")
 	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 	
@@ -41,7 +48,7 @@ public class Pedido implements Serializable {
 
 	public Pedido(Integer id, Cliente cliente, Endereco enderecoEntrega) {
 		this.id = id;
-		this.instante = Instant.now();
+		this.instante = LocalTime.now();
 		this.cliente = cliente;
 		this.enderecoEntrega = enderecoEntrega;
 	}
@@ -53,10 +60,10 @@ public class Pedido implements Serializable {
 		this.id = id;
 	}
 
-	public Instant getInstante() {
+	public LocalTime getInstante() {
 		return instante;
 	}
-	public void setInstante(Instant instante) {
+	public void setInstante(LocalTime instante) {
 		this.instante = instante;
 	}
 

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import UML.springUML.domain.enums.TipoCliente;
@@ -29,7 +30,7 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy="cliente") @JsonManagedReference
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy="cliente") @JsonBackReference
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	
 	@ElementCollection
