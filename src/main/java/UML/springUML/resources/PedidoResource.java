@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import UML.springUML.domain.Endereco;
-import UML.springUML.services.EnderecoService;
+import UML.springUML.domain.Pedido;
+import UML.springUML.services.PedidoService;
 
 @RestController
-@RequestMapping("/enderecos")
-public class EnderecoResource {
+@RequestMapping("/Pedidos")
+public class PedidoResource {
 	
 	@Autowired
-	private EnderecoService endServ;
+	private PedidoService pedServ;
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<?> allEndereco(@PathVariable Integer id) {
-		Endereco obj = endServ.find(id);
+	public ResponseEntity<?> allPedido(@PathVariable Integer id) {
+		Pedido obj = pedServ.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }
